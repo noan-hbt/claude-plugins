@@ -1,0 +1,23 @@
+{
+  "name": "noan-hbt",
+  "owner": {
+    "name": "noan-hbt"
+  },
+  "metadata": {
+    "description": "Mes plugins Claude Code"
+  },
+  "plugins": [
+    {
+      "name": "token-usage",
+      "description": "Profileur de tokens : attribue l'usage à la commande, au skill ou au sous-agent, et tient le ledger lu par la barre d'état",
+      "source": {
+        "source": "github",
+        "repo": "Wicked-Sick-Ltd/token-usage",
+        "ref": "v0.9.0",
+        "sha": "fe998547b0dfa9472e2a80cb9beee9bae3018575"
+      },
+      "homepage": "https://github.com/Wicked-Sick-Ltd/token-usage",
+      "license": "MIT"
+    }
+  ]
+}

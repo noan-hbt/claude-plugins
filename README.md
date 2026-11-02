@@ -1,6 +1,21 @@
 # claude-plugins
 
-Mes réglages et extensions pour Claude Code.
+Mes réglages et extensions pour Claude Code. Le repo est aussi un marketplace de plugins :
+
+```
+claude plugin marketplace add noan-hbt/claude-plugins
+claude plugin install token-usage@noan-hbt
+```
+
+## Plugins
+
+| Plugin | Rôle | Source |
+|---|---|---|
+| `token-usage` | profileur de tokens par commande, skill et sous-agent ; tient le ledger lu par la barre d'état | [Wicked-Sick-Ltd/token-usage](https://github.com/Wicked-Sick-Ltd/token-usage), épinglé sur `v0.9.0` |
+
+Le plugin est référencé, pas copié : pour monter de version, changer `ref` et `sha` dans
+`.claude-plugin/marketplace.json` après avoir relu le diff upstream. Il lance `python3`
+(hooks `Stop`/`SubagentStop` et un serveur MCP local), sans accès réseau.
 
 ## Barre d'état d'usage
 
