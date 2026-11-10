@@ -1,6 +1,6 @@
 ---
 name: delegate
-description: Delegate an isolated coding task to an external CLI (codex exec, then opencode run) to save Claude quota, then verify the diff. Use for /delegate, "délègue à codex", "fais-le faire par codex/opencode", or when the user's instructions say to delegate serious code work. Not for exploration or one-line edits.
+description: Delegate an isolated coding task to an external CLI (codex exec, fallback opencode run) to save Claude quota, then verify the diff. Use for /delegate, "délègue à codex", "fais-le faire par codex/opencode", or when the user's instructions say to delegate serious code work. Not for exploration or one-line edits.
 argument-hint: "[codex|opencode] <task>"
 ---
 
@@ -8,7 +8,9 @@ argument-hint: "[codex|opencode] <task>"
 
 ## When it pays off
 
-Isolable work with a clear done-criterion: implement a function or module, write tests, a mechanical refactor, a migration across files. Skip it for a one-line fix, work that needs this conversation's context, or anything needing secrets or network side effects — doing it yourself is cheaper there.
+Isolable work with a clear done-criterion: implement a function or module, write tests, a mechanical refactor, a migration across files. Skip it for a one-line fix, work that needs this conversation's context, or anything needing secrets or network side effects.
+
+Several independent tasks: delegate them in parallel, each in its own background run, as long as they touch disjoint files.
 
 ## 1. Write a self-contained prompt
 
@@ -16,29 +18,29 @@ The CLI sees none of this conversation. The prompt must state:
 
 - **Goal** — the outcome, in one or two sentences.
 - **Files** — exact paths to read and to change; files it must not touch.
-- **Constraints** — conventions to follow (point to an example file), no new dependencies unless named, keep the public API.
+- **Constraints** — conventions (point to an example file), no new dependencies unless named, keep the public API, no git commands.
 - **Done when** — the command that must pass (e.g. `pytest tests/test_x.py -q`).
-- **Report** — "End with a list of the files changed and the check output."
+- **Report** — "End with the files changed and the check output."
 
-Write it to `<scratchpad>/delegate-prompt.md` when it is long; pass it with `"$(cat file)"`.
+Write it to a file in the scratchpad.
 
 ## 2. Run
 
+Default — keep the main context clean: spawn the `delegate-runner` agent with the prompt; it runs the CLIs, verifies, and returns a short verdict.
+
+Direct, when you want to watch it yourself:
+
 ```bash
-codex exec -s workspace-write -o "<scratchpad>/codex-out.md" "<prompt>"
+node "${CLAUDE_PLUGIN_ROOT}/scripts/run.js" --cwd <repo root> --prompt-file <file> [--engine codex|opencode] [--timeout 1200]
 ```
 
-- Run with `run_in_background` when it may take over ~2 minutes; you are notified on exit.
-- Read **only** the `-o` file, never the full stream.
-- Fallback when codex fails, is out of quota, or is not installed: `opencode run "<prompt>"` (capture its last lines only).
-- Both fail: use a Claude subagent (`model: "sonnet"` for code, `"haiku"` for mechanical edits) with the same prompt.
-- In a git worktree, run from the worktree root so the CLI writes there.
+It tries codex (`exec -s workspace-write`, prompt via stdin, final message via `-o`), falls back to opencode on failure, quota or missing binary, and prints only: engine, its final report, `git diff --stat`, new files. Exit 1 = both failed → use a Claude subagent (`model: "sonnet"`) with the same prompt. Use `run_in_background` for long tasks. In a worktree, pass the worktree root as `--cwd`.
 
-## 3. Verify (always)
+## 3. Verify (always, unless delegate-runner did)
 
-1. `git diff --stat` — changes stay within the declared files. Revert stray edits.
+1. Changes stay within the declared files; revert stray edits.
 2. Read the diff of the changed files, not whole files.
 3. Run the "Done when" command yourself; don't trust the CLI's claim.
-4. Fix small gaps directly. A wrong approach: re-delegate once with a sharper prompt citing the failure, else do it yourself.
+4. Fix small gaps directly; a wrong approach → re-delegate once with a sharper prompt citing the failure, else do it yourself.
 
-Report in one or two lines: which CLI did it, check result, anything you fixed.
+Report in one or two lines: which engine did it, check result, anything you fixed.

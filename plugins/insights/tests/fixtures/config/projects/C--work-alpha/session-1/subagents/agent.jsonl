@@ -1,0 +1,2 @@
+{"type":"user","isSidechain":true,"cwd":"C:\\work\\alpha","timestamp":"2026-11-01T11:00:00Z","message":{"role":"user","content":"Nested worker prompt"}}
+{"type":"assistant","isSidechain":true,"timestamp":"2026-11-01T11:01:00Z","message":{"role":"assistant","usage":{"input_tokens":50,"output_tokens":10,"cache_read_input_tokens":15},"content":[{"type":"tool_use","id":"nested-status","name":"Bash","input":{"command":"rtk git status --short"}}]}}

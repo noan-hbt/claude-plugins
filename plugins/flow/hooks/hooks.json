@@ -1,15 +1,16 @@
 {
   "hooks": {
     "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/session-context.js\"",
-            "timeout": 10
-          }
-        ]
-      }
+      { "hooks": [{ "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/flow.js\" SessionStart", "timeout": 10 }] }
+    ],
+    "UserPromptSubmit": [
+      { "hooks": [{ "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/flow.js\" UserPromptSubmit", "timeout": 5 }] }
+    ],
+    "PreCompact": [
+      { "hooks": [{ "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/flow.js\" PreCompact", "timeout": 15 }] }
+    ],
+    "SessionEnd": [
+      { "hooks": [{ "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/flow.js\" SessionEnd", "timeout": 15 }] }
     ]
   }
 }

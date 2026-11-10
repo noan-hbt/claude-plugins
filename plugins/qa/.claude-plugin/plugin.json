@@ -1,0 +1,7 @@
+{
+  "name": "qa",
+  "version": "0.1.0",
+  "description": "Automatically check edited code before Claude finishes, and block on failures for up to three attempts.",
+  "author": { "name": "noan-hbt" },
+  "license": "MIT"
+}
