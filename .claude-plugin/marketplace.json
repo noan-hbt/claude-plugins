@@ -8,6 +8,18 @@
   },
   "plugins": [
     {
+      "name": "flow",
+      "description": "Ship (commit, push, PR, merge), handoff/resume across /clear, worktree context at session start",
+      "source": "./plugins/flow",
+      "category": "productivity"
+    },
+    {
+      "name": "delegate",
+      "description": "Hand isolated coding tasks to codex/opencode outside the Claude quota, then verify the diff",
+      "source": "./plugins/delegate",
+      "category": "productivity"
+    },
+    {
       "name": "token-usage",
       "description": "Token profiler: attributes usage to the command, skill or subagent, and keeps the ledger read by the status line",
       "source": {

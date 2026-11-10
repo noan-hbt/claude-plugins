@@ -1,0 +1,7 @@
+{
+  "name": "flow",
+  "version": "0.1.0",
+  "description": "Day-to-day loop: ship (commit, push, PR, merge), handoff/resume across /clear, and worktree context injected at session start",
+  "author": { "name": "noan-hbt" },
+  "license": "MIT"
+}

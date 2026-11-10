@@ -1,0 +1,7 @@
+{
+  "name": "delegate",
+  "version": "0.1.0",
+  "description": "Hand isolated coding tasks to external CLIs (codex, opencode) outside the Claude quota, then verify the result",
+  "author": { "name": "noan-hbt" },
+  "license": "MIT"
+}
