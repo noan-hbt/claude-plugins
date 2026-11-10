@@ -9,14 +9,32 @@
   "plugins": [
     {
       "name": "flow",
-      "description": "Ship (commit, push, PR, merge), handoff/resume across /clear, worktree context at session start",
+      "description": "Ship (commit, push, PR, merge), handoff/resume, automatic context carry-over across /clear and compaction, worktree awareness, short go-ahead detection",
       "source": "./plugins/flow",
       "category": "productivity"
     },
     {
       "name": "delegate",
-      "description": "Hand isolated coding tasks to codex/opencode outside the Claude quota, then verify the diff",
+      "description": "Hand isolated coding tasks to codex/opencode outside the Claude quota via a runner script and a verifying subagent",
       "source": "./plugins/delegate",
+      "category": "productivity"
+    },
+    {
+      "name": "guard",
+      "description": "PreToolUse safety and speed layer: auto-allows read-only commands, fences worktrees, blocks force-push, --no-verify, secret leaks and destructive deletes",
+      "source": "./plugins/guard",
+      "category": "productivity"
+    },
+    {
+      "name": "qa",
+      "description": "Stop hook that runs the tests related to the files Claude edited and makes it fix failures before finishing",
+      "source": "./plugins/qa",
+      "category": "productivity"
+    },
+    {
+      "name": "insights",
+      "description": "Analyses your session transcripts into a usage report with concrete fixes; /adapt tunes Claude Code to the current project",
+      "source": "./plugins/insights",
       "category": "productivity"
     },
     {

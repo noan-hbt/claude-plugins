@@ -1,0 +1,40 @@
+{
+  "marketplaces": ["noan-hbt/claude-plugins"],
+  "plugins": ["flow@noan-hbt", "delegate@noan-hbt", "guard@noan-hbt", "qa@noan-hbt", "insights@noan-hbt", "token-usage@noan-hbt"],
+  "tools": [
+    {"name": "git", "check": "git --version", "winget": "Git.Git"},
+    {"name": "gh", "check": "gh --version", "winget": "GitHub.cli"},
+    {"name": "node", "check": "node --version", "winget": "OpenJS.NodeJS.LTS"},
+    {"name": "python", "check": "python --version", "winget": "Python.Python.3.12"},
+    {"name": "uv", "check": "uv --version", "winget": "astral-sh.uv"},
+    {"name": "codex", "check": "codex --version", "npm": "@openai/codex"},
+    {"name": "opencode", "check": "opencode --version", "npm": "opencode-ai"},
+    {"name": "rtk", "check": "rtk --version", "winget": "rtk-ai.rtk", "optional": true},
+    {"name": "cargo", "check": "cargo --version", "winget": "Rustlang.Rustup", "optional": true}
+  ],
+  "home": {
+    "statusline.js": "copy",
+    "caveman-on.js": "copy",
+    "CLAUDE.md": "managed-block",
+    "RTK.md": "copy-if-absent"
+  },
+  "settings": {
+    "permissions": {
+      "allow": [
+        "Bash(codex exec:*)", "Bash(opencode run:*)", "PowerShell(codex exec:*)", "PowerShell(opencode run:*)",
+        "Bash(git status:*)", "Bash(git diff:*)", "Bash(git log:*)", "Bash(gh pr view:*)", "Bash(gh pr checks:*)",
+        "Bash(python -m pytest:*)", "Bash(pytest:*)", "Bash(npm test:*)", "Bash(npm run:*)", "Bash(rtk:*)"
+      ]
+    },
+    "model": "opus",
+    "statusLine": {"type": "command", "command": "node {{CONFIG_DIR}}/statusline.js", "refreshInterval": 30},
+    "hooks": {
+      "SessionStart": [{"hooks": [{"type": "command", "command": "node {{CONFIG_DIR}}/caveman-on.js"}]}],
+      "PreToolUse": [{"matcher": "Bash", "requires": "rtk", "hooks": [{"type": "command", "command": "rtk hook claude"}]}]
+    },
+    "enableWorkflows": true,
+    "autoCompactEnabled": true,
+    "modelSettings": {"claude-opus-5-5": {"effortLevel": "medium", "autoCompactWindow": 500000}}
+  },
+  "localSettings": {"outputStyle": "Concise"}
+}

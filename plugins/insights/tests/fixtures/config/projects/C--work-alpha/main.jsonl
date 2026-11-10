@@ -1,0 +1,24 @@
+{"type":"user","cwd":"C:\\work\\alpha","timestamp":"2026-11-01T10:00:00Z","message":{"role":"user","content":"Bonjour, peux tu corriger le fichier et faire les tests ?"}}
+not valid json
+{"type":"user","timestamp":"2026-11-01T10:01:00Z","message":{"role":"user","content":"ok"}}
+{"type":"user","timestamp":"2026-11-01T10:02:00Z","message":{"role":"user","content":"vas-y"}}
+{"type":"user","timestamp":"2026-11-01T10:03:00Z","message":{"role":"user","content":"yes"}}
+{"type":"user","timestamp":"2026-11-01T10:04:00Z","message":{"role":"user","content":"Always test changes 123"}}
+{"type":"user","timestamp":"2026-11-01T10:05:00Z","message":{"role":"user","content":"always test changes 456"}}
+{"type":"user","timestamp":"2026-11-01T10:06:00Z","message":{"role":"user","content":"ALWAYS TEST CHANGES 789"}}
+{"type":"user","timestamp":"2026-11-01T10:07:00Z","message":{"role":"user","content":"Non, ça marche pas, refais les tests."}}
+{"type":"user","timestamp":"2026-11-01T10:08:00Z","message":{"role":"user","content":"wrong response"}}
+{"type":"user","timestamp":"2026-11-01T10:09:00Z","message":{"role":"user","content":"<command-name>/clear</command-name><command-message>clear</command-message>"}}
+{"type":"user","timestamp":"2026-11-01T10:10:00Z","message":{"role":"user","content":"reprends le travail"}}
+{"type":"user","timestamp":"2026-11-01T10:11:00Z","message":{"role":"user","content":"<command-name>/compact</command-name><command-message>compact</command-message>"}}
+{"type":"user","timestamp":"2026-11-01T10:12:00Z","message":{"role":"user","content":"continue with the next step"}}
+{"type":"user","timestamp":"2026-11-01T10:13:00Z","message":{"role":"user","content":"<command-name>/help</command-name>"}}
+{"type":"user","timestamp":"2026-11-01T10:14:00Z","message":{"role":"user","content":"<local-command-stdout>generated output</local-command-stdout>"}}
+{"type":"user","timestamp":"2026-11-01T10:15:00Z","message":{"role":"user","content":"<system-reminder>generated context</system-reminder>"}}
+{"type":"user","timestamp":"2026-11-01T10:16:00Z","message":{"role":"user","content":"Caveat: generated context"}}
+{"type":"user","timestamp":"2026-11-01T10:17:00Z","message":{"role":"user","content":[{"type":"text","text":"generated tool context"},{"type":"tool_result","tool_use_id":"unmatched","content":"done"}]}}
+{"type":"user","timestamp":"2026-11-01T10:18:00Z","message":{"role":"user","content":[{"type":"text","text":"Investigate parser behavior"}]}}
+{"type":"assistant","timestamp":"2026-11-01T10:19:00Z","message":{"role":"assistant","usage":{"input_tokens":100,"output_tokens":20,"cache_read_input_tokens":30},"content":[{"type":"tool_use","id":"bash-test","name":"Bash","input":{"command":"rtk npm test"}},{"type":"tool_use","id":"bash-codex","name":"Bash","input":{"command":"codex exec review"}},{"type":"tool_use","id":"ps-read","name":"PowerShell","input":{"command":"Get-Content README.md"}},{"type":"tool_use","id":"mcp-failed","name":"mcp__github__list_repos","input":{}},{"type":"tool_use","id":"mcp-success","name":"mcp__github__get_issue","input":{}},{"type":"tool_use","id":"agent-explore","name":"Agent","input":{"subagent_type":"Explore","model":"haiku"}},{"type":"tool_use","id":"agent-general","name":"Agent","input":{"subagent_type":"general-purpose","model":"sonnet"}},{"type":"tool_use","id":"skill-qa","name":"Skill","input":{"skill":"qa:qa"}},{"type":"tool_use","id":"read-unread","name":"Read","input":{"file_path":"/tmp/source.js"}},{"type":"tool_use","id":"bash-missing","name":"Bash","input":{"command":"missing-widget --version"}}]}}
+{"type":"user","timestamp":"2026-11-01T10:20:00Z","message":{"role":"user","content":[{"type":"tool_result","tool_use_id":"bash-test","is_error":true,"content":"Permission for this action was denied"},{"type":"tool_result","tool_use_id":"ps-read","is_error":true,"content":"This command requires approval"},{"type":"tool_result","tool_use_id":"mcp-failed","is_error":true,"content":[{"type":"text","text":"Remote server timed out"}]},{"type":"tool_result","tool_use_id":"mcp-success","content":"done"},{"type":"tool_result","tool_use_id":"read-unread","is_error":true,"content":"File has not been read yet"},{"type":"tool_result","tool_use_id":"bash-missing","is_error":true,"content":"missing-widget: command not found"}]}}
+{"type":"user","timestamp":"2026-11-01T10:21:00Z","message":{"role":"user","content":"[Request interrupted by user]"}}
+{"type":"assistant","timestamp":"2026-11-01T13:01:00Z","message":{"role":"assistant","usage":{"input_tokens":200,"output_tokens":40,"cache_read_input_tokens":60},"content":[{"type":"text","text":"Finished."}]}}

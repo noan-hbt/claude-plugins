@@ -1,0 +1,2 @@
+{"type":"user","cwd":"C:\\work\\alpha","timestamp":"2026-10-01T10:00:00Z","message":{"role":"user","content":"Old prompt outside the period"}}
+{"type":"assistant","timestamp":"2026-10-01T10:01:00Z","message":{"role":"assistant","usage":{"input_tokens":9999,"output_tokens":9999,"cache_read_input_tokens":9999},"content":[{"type":"tool_use","id":"old-bash","name":"Bash","input":{"command":"old-tool run"}}]}}
