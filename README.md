@@ -1,6 +1,6 @@
 # claude-plugins
 
-Mes réglages et extensions pour Claude Code. Le repo est aussi un marketplace de plugins :
+My settings and extensions for Claude Code. The repo is also a plugin marketplace:
 
 ```
 claude plugin marketplace add noan-hbt/claude-plugins
@@ -9,49 +9,49 @@ claude plugin install token-usage@noan-hbt
 
 ## Plugins
 
-| Plugin | Rôle | Source |
+| Plugin | Role | Source |
 |---|---|---|
-| `token-usage` | profileur de tokens par commande, skill et sous-agent ; tient le ledger lu par la barre d'état | [Wicked-Sick-Ltd/token-usage](https://github.com/Wicked-Sick-Ltd/token-usage), épinglé sur `v0.9.0` |
+| `token-usage` | token profiler per command, skill and subagent; keeps the ledger read by the status line | [Wicked-Sick-Ltd/token-usage](https://github.com/Wicked-Sick-Ltd/token-usage), pinned to `v0.9.0` |
 
-Le plugin est référencé, pas copié : pour monter de version, changer `ref` et `sha` dans
-`.claude-plugin/marketplace.json` après avoir relu le diff upstream. Il lance `python3`
-(hooks `Stop`/`SubagentStop` et un serveur MCP local), sans accès réseau.
+The plugin is referenced, not copied: to upgrade, change `ref` and `sha` in
+`.claude-plugin/marketplace.json` after reviewing the upstream diff. It runs `python3`
+(`Stop`/`SubagentStop` hooks and a local MCP server), with no network access.
 
-## Barre d'état d'usage
+## Usage status line
 
-Affiche l'usage en permanence, sans avoir à taper `/usage` :
+Shows your usage at all times, without typing `/usage`:
 
 ```
 [CAVEMAN] Opus 5.5 · ctx 62% · 5h 12% · 7d 85% · 5k out · ~$0.46 · top: /code-review
 ```
 
-| Élément | Sens | Source |
+| Part | Meaning | Source |
 |---|---|---|
-| `[CAVEMAN]` | mode caveman actif | plugin `caveman` |
-| `ctx` | contexte utilisé | Claude Code |
-| `5h` / `7d` | limites du plan (vert, jaune dès 50 %, rouge dès 80 %) | Claude Code |
-| `5k out` | tokens de sortie de la session | plugin `token-usage` |
-| `~$0.46` | coût API estimé, pas la facture d'un abonnement | plugin `token-usage` |
-| `top:` | commande la plus coûteuse | plugin `token-usage` |
+| `[CAVEMAN]` | caveman mode is on | `caveman` plugin |
+| `ctx` | context used | Claude Code |
+| `5h` / `7d` | plan limits (green, yellow from 50 %, red from 80 %) | Claude Code |
+| `5k out` | session output tokens | `token-usage` plugin |
+| `~$0.46` | estimated API cost, not a subscription bill | `token-usage` plugin |
+| `top:` | most expensive command | `token-usage` plugin |
 
-Une partie sans données est masquée, donc les deux plugins sont facultatifs. Les données de
-`token-usage` se rafraîchissent à la fin de chaque tour ou sous-agent.
+A part with no data is hidden, so both plugins are optional. The `token-usage` data refreshes at
+the end of each turn or subagent.
 
-### Installation (Windows PowerShell 5.1)
+### Install (Windows PowerShell 5.1)
 
-Copier le script :
+Copy the script:
 
 ```powershell
 Copy-Item statusline\statusline.ps1 "$HOME\.claude\statusline.ps1"
 ```
 
-Puis dans `~/.claude/settings.json`, en remplaçant `<utilisateur>` :
+Then in `~/.claude/settings.json`, replacing `<user>`:
 
 ```json
 {
   "statusLine": {
     "type": "command",
-    "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"C:\\Users\\<utilisateur>\\.claude\\statusline.ps1\""
+    "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"C:\\Users\\<user>\\.claude\\statusline.ps1\""
   }
 }
 ```

@@ -4,12 +4,12 @@
     "name": "noan-hbt"
   },
   "metadata": {
-    "description": "Mes plugins Claude Code"
+    "description": "My Claude Code plugins"
   },
   "plugins": [
     {
       "name": "token-usage",
-      "description": "Profileur de tokens : attribue l'usage à la commande, au skill ou au sous-agent, et tient le ledger lu par la barre d'état",
+      "description": "Token profiler: attributes usage to the command, skill or subagent, and keeps the ledger read by the status line",
       "source": {
         "source": "github",
         "repo": "Wicked-Sick-Ltd/token-usage",
