@@ -4,6 +4,8 @@ My settings and extensions for Claude Code. The repo is also a plugin marketplac
 
 ```
 claude plugin marketplace add noan-hbt/claude-plugins
+claude plugin install flow@noan-hbt
+claude plugin install delegate@noan-hbt
 claude plugin install token-usage@noan-hbt
 ```
 
@@ -11,11 +13,23 @@ claude plugin install token-usage@noan-hbt
 
 | Plugin | Role | Source |
 |---|---|---|
+| `flow` | `/ship [merge]` commit → push → PR → merge; `/handoff` saves task state before `/clear`, `/resume` picks it up; a SessionStart hook injects repo, branch, worktree and pending handoff | [`plugins/flow`](plugins/flow) |
+| `delegate` | `/delegate` hands an isolated coding task to `codex exec` (fallback `opencode run`, then a subagent) and verifies the diff | [`plugins/delegate`](plugins/delegate) |
 | `token-usage` | token profiler per command, skill and subagent; keeps the ledger read by the status line | [Wicked-Sick-Ltd/token-usage](https://github.com/Wicked-Sick-Ltd/token-usage), pinned to `v0.9.0` |
 
-The plugin is referenced, not copied: to upgrade, change `ref` and `sha` in
+`flow` and `delegate` live in this repo. `token-usage` is referenced, not copied: to upgrade, change `ref` and `sha` in
 `.claude-plugin/marketplace.json` after reviewing the upstream diff. It runs `python3`
 (`Stop`/`SubagentStop` hooks and a local MCP server), with no network access.
+
+## Layout
+
+```
+.claude-plugin/marketplace.json   marketplace index
+plugins/<name>/                    local plugins (.claude-plugin/plugin.json, skills/, hooks/)
+statusline/                        status line script (not a plugin)
+```
+
+Check before pushing: `claude plugin validate .` and `claude plugin validate plugins/<name>`.
 
 ## Usage status line
 
